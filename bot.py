@@ -1,18 +1,15 @@
+import os
 import discord
-from discord.ext import commands
 
 intents = discord.Intents.default()
-intents.message_content = True  # Importante pra ler mensagens!
+intents.message_content = True  # depende das permissões do seu bot
+client = discord.Client(intents=intents)
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+TOKEN = os.getenv("DISCORD_TOKEN")
 
-@bot.event
+@client.event
 async def on_ready():
-    print(f'Bot conectado como {bot.user}')
+    print(f"Bot conectado como {client.user}")
 
-@bot.command()
-async def ping(ctx):
-    await ctx.send('Pong! 🏓')
+client.run(TOKEN)
 
-import os
-bot.run(os.getenv("DISCORD_TOKEN"))
