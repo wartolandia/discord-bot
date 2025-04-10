@@ -12,9 +12,9 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 
 @client.event
 async def on_ready():
-    print(f"Bot conectado como {client.user}")
+    print(f"✅ Bot conectado como {client.user}")
 
-# Servidor HTTP falso
+# Servidor HTTP falso para o Render
 class SimpleHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
@@ -22,8 +22,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
         self.wfile.write(b'Bot is running!')
 
 def run_http_server():
-    port = int(os.environ.get("PORT", 10000))  # Usa a porta que o Render define
-    print(f"Servidor HTTP ouvindo na porta {port}")  # ESSA LINHA AJUDA MUITO NO DEBUG
+    port = int(os.environ.get("PORT", 10000))  # pega a porta do Render
+    print(f"Servidor HTTP ouvindo na porta {port}")
     server = HTTPServer(('0.0.0.0', port), SimpleHandler)
     server.serve_forever()
 
